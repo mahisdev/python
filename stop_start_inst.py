@@ -1,8 +1,11 @@
 import boto3
 ec2=boto3.resource("ec2")
+import subprocess
+cmd=['python','instance_ip.py']
+subprocess.Popen(cmd).wait()
 
 userinput=raw_input("Please write What you want to do with instance stop or start: ")
-
+print "********Select instance ID's from above list********"
 if userinput == 'start':
     inid=raw_input("Enter instance ID which you want to start: ")
     inst=ec2.Instance(inid)
