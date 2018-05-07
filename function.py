@@ -15,7 +15,6 @@ def start():
     for i in ec2.instances.all():
         if i.id==inid:
             print "Server ",i.tags[0]['Value'],"is ",i.state['Name']
-    return
 
 def stop():
     print "*****Copy the Instance ID from the above list*****"
@@ -28,7 +27,6 @@ def stop():
     for i in ec2.instances.all():
         if i.id==inid:
             print "Server ",i.tags[0]['Value'],"is ",i.state['Name']
-    return
 
 def terminate():
     print "*****Copy the Instance ID from the above list*****"
