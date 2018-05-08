@@ -1,0 +1,30 @@
+In [89]: import boto3
+    ...: ec2 = boto3.resource('ec2')
+    ...: ec2client = boto3.client('ec2')
+    ...: response = ec2client.describe_vpcs()
+    ...: print(response)
+    ...:
+{u'Vpcs': [{u'VpcId': 'vpc-a9c9aed2', u'InstanceTenancy': 'default', u'Tags': [{u'Value': 'vpcvirg1', u'Key': 'Name'}], u'CidrBlockAssociationSet': [{u'AssociationId': 'vpc-cidr-assoc-65197608', u'CidrBlock': '192.168.0.0/16', u'CidrBlockState': {u'State': 'associated'}}], u'State': 'available', u'DhcpOptionsId': 'dopt-91162de9', u'CidrBlock': '192.168.0.0/16', u'IsDefault': False}, {u'VpcId': 'vpc-7fd1b604', u'InstanceTenancy': 'default', u'Tags': [{u'Value': 'vpcvirg2', u'Key': 'Name'}], u'CidrBlockAssociationSet': [{u'AssociationId': 'vpc-cidr-assoc-91127dfc', u'CidrBlock': '172.16.0.0/16', u'CidrBlockState': {u'State': 'associated'}}], u'State': 'available', u'DhcpOptionsId': 'dopt-91162de9', u'CidrBlock': '172.16.0.0/16', u'IsDefault': False}, {u'VpcId': 'vpc-0ca3f877', u'InstanceTenancy': 'default', u'CidrBlockAssociationSet': [{u'AssociationId': 'vpc-cidr-assoc-df5d71b2', u'CidrBlock': '10.0.0.0/16', u'CidrBlockState': {u'State': 'associated'}}], u'State': 'available', u'DhcpOptionsId': 'dopt-91162de9', u'CidrBlock': '10.0.0.0/16', u'IsDefault': False}], 'ResponseMetadata': {'RetryAttempts': 0, 'HTTPStatusCode': 200, 'RequestId': '069d0a09-d62c-49d7-acdf-34aba8981e59', 'HTTPHeaders': {'transfer-encoding': 'chunked', 'vary': 'Accept-Encoding', 'server': 'AmazonEC2', 'content-type': 'text/xml;charset=UTF-8', 'date': 'Tue, 08 May 2018 13:58:45 GMT'}}}
+
+vpc['Tags'][0]['Value']
+
+import boto3
+     ...: ec2 = boto3.resource('ec2')
+     ...: ec2client = boto3.client('ec2')
+     ...: response = ec2client.describe_vpcs()
+     ...: for vpc in response["Vpcs"]:
+     ...:     print vpc["VpcId"],vpc['State'],vpc['CidrBlock'],vpc['CidrBlockAssociationSet'][0]['CidrBlockState']['State']
+     ...:
+vpc-a9c9aed2 available 192.168.0.0/16 associated
+vpc-7fd1b604 available 172.16.0.0/16 associated
+vpc-0ca3f877 available 10.0.0.0/16 associated
+
+
+In [116]: import boto3
+     ...: ec2 = boto3.resource('ec2')
+     ...: ec2client = boto3.client('ec2')
+     ...: vpc=ec2.vpcs.all()
+     ...: for i in vpc:
+     ...:     print i.id,i.state,i.tags[0]['Value']
+
+
