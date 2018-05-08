@@ -1,29 +1,25 @@
 import boto3
 ec2=boto3.resource("ec2")
 import function
+function.list_instances();
 
-x=0
-while True and x<3:
+while True:
+    print "\n 1. Create \n 2. Start \n 3. Stop \n 4. Terminate \n 5. Exit \n"
+    inp=input("Choose options shown above: ")
     print ""
-    userinput=raw_input("Please write What you want to do with instances create|start|stop|terminate: ")
-    if (userinput != 'start' and userinput != 'stop'and userinput != 'create' and userinput != 'terminate'):
-        print ""
-        print "Caution!!!! ***Please Enter valid inputs***"
-        print "For Example type create or start or stop or terminate "
-    elif userinput == 'create':
+    if inp == 1:
         function.create();
-        break
-    elif userinput == 'start':
+    elif inp == 2:
         function.start();
-        break
-    elif userinput == 'terminate':
+    elif inp == 3:
+        function.stop();
+    elif inp == 4:
         function.terminate();
+    elif inp == 5:
+        function.list_instances();
+        print "\n!!! Thank you !!! See you Again !!!\n"
         break
     else:
-        function.stop();
-        break
-    x=x+1
-    print ""
-    print x,"Attempts Failed !!"
-    print "Max attempts '3' only"
+        print "!!!  Dear Customer Kindly Choose correct option  !!!!!"
+
     

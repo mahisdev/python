@@ -1,8 +1,11 @@
 import boto3
 ec2=boto3.resource("ec2")
 import subprocess
-cmd=['python','instance_ip.py']
-subprocess.Popen(cmd).wait()
+
+def list_instances():
+    print "\nList of Instances \n"
+    cmd=['python','instance_ip.py']
+    subprocess.Popen(cmd).wait()
 
 def start():
     print "*****Copy the Instance ID from the above list*****"
@@ -15,6 +18,7 @@ def start():
     for i in ec2.instances.all():
         if i.id==inid:
             print "Server ",i.tags[0]['Value'],"is ",i.state['Name']
+    return
 
 def stop():
     print "*****Copy the Instance ID from the above list*****"
@@ -27,6 +31,7 @@ def stop():
     for i in ec2.instances.all():
         if i.id==inid:
             print "Server ",i.tags[0]['Value'],"is ",i.state['Name']
+    return
 
 def terminate():
     print "*****Copy the Instance ID from the above list*****"
